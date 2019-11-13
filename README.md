@@ -4,7 +4,7 @@
 
 Submitted by: **Dinaol Tadesse**
 
-Time spent: **1** hours spent in total
+Time spent: **0.50** hours spent in total
 
 ## User Stories
 
