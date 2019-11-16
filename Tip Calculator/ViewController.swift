@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var coin: UIImageView!
     @IBOutlet weak var billAmountTextField: UITextField!
     @IBOutlet weak var tipLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
@@ -18,6 +19,12 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        if UserDefaults.standard.double(forKey: "lastBill") != 0.0{
+            billAmountTextField.text = String(UserDefaults.standard.double(forKey: "lastBill"))
+            calculateTip(self)
+        }
     }
 
     @IBAction func didTapView(_ sender: Any) {
@@ -28,7 +35,7 @@ class ViewController: UIViewController {
     @IBAction func calculateTip(_ sender: Any) {
         let bill = Double(billAmountTextField.text!) ?? 0
         
-        
+        UserDefaults.standard.set(bill, forKey: "lastBill")
         //get bill amount
         let tipPercentages = [0.1,0.18,0.2]
         let tip = bill * tipPercentages[tipControl.selectedSegmentIndex]
@@ -39,6 +46,14 @@ class ViewController: UIViewController {
         tipLabel.text = String(format: "$%.2f", tip)
         totalLabel.text = String(format: "$%.2f", total)
     }
+    
+//    func dropCoin(tips numberTip: Int){
+//        let coinLocation = coin.frame.origin
+//        
+//        
+//        
+//        
+//    }
     
 }
 
